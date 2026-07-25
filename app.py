@@ -7,7 +7,6 @@ app = Flask(__name__)
 @app.route("/")
 def home():
     return render_template("index.html")
-    return "<h1>Welcome to StudyForge</h1>"
 
 print("Before app.run()")
 
