@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% block title %}
+Dashboard|StudyForge
+{% endblock %}
+
+{% block content %}
+
+<h1 class="system-title">SYSTEM ONLINE</h1>
+
+<div class="dashboard">
+
+    <!-- Player Card -->
+    <div class="player-card">
+
+        <h2>{{ username }}</h2>
+
+        <p>🏅 Rank: {{ rank }}</p>
+
+        <p>⭐ Level {{ level }}</p>
+
+        <p>XP: {{ xp }}/{{ xp_cap }}</p>
+
+        <div class="xp-bar">
+            <div class="xp-fill" style="width: {{ xp }}%;"></div>
+        </div>
+
+        <p>💰 Coins: {{ coins }}</p>
+
+    </div>
+
+
+    <!-- Daily Mission -->
+    <div class="mission-card">
+
+        <h2>Today's Mission</h2>
+
+        <p>Complete one assignment.</p>
+
+        <p>Reward: +50 XP</p>
+
+    </div>
+
+
+    <!-- Assignments -->
+    <div class="assignment-card">
+
+        <h2>⚔ Active Quests</h2>
+
+        {% if assignments %}
+
+            
+                {% for assignment in assignments %}
+
+<div class="quest-card">
+
+    <div class="quest-header">
+
+        <h3>📘 {{ assignment[1] }}</h3>
+
+        {% if assignment[4] == "Pending" %}
+            <span class="pending">MAIN QUEST</span>
+        {% else %}
+            <span class="completed">COMPLETED</span>
+        {% endif %}
+
+    </div>
+
+    <p>📚 Subject: {{ assignment[2] }}</p>
+
+    <p>📅 Due: {{ assignment[3] }}</p>
+
+    <p>Reward: ⭐ +50 XP &nbsp;&nbsp; 💰 +20 Coins</p>
+
+    {% if assignment[4] == "Pending" %}
+
+        <a href="/complete_assignment/{{ assignment[0] }}" class="btn">
+            Complete Quest
+        </a>
+
+    {% else %}
+
+        <button class="btn completed-btn" disabled>
+            Quest Completed
+        </button>
+
+    {% endif %}
+
+    <a href="/edit_assignment/{{ assignment[0] }}" class="btn">
+        Edit
+    </a>
+
+    <a href="/delete_assignment/{{ assignment[0] }}" class="btn">
+        Abandon
+    </a>
+
+</div>
+
+
+
+            {% endfor %}
+
+        {% else %}
+
+            <p>No assignments yet.</p>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- Calendar -->
+    <div class="calendar-card">
+
+        <h2>Calendar</h2>
+
+        <p>Coming Soon...</p>
+
+    </div>
+
+</div>
+{% endblock %}

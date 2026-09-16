@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block title %}
+Dashboard|StudyForge
+{% endblock %}
+
+{% block content %}
+
+<h1>Dashboard</h1>
+<div class="dashboard-grid">
+    <div class="card">
+        <h2>Welcome back, {{ username }}!</h2>
+
+        <p> Level: {{ level }} </p>
+
+        <p> XP: {{ xp }}/100 </p>
+
+        <div class="xp-bar">
+            <div class="xp-fill" style="width: {{ xp }}%;"></div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>Calendar</h2>
+
+        <p> No events today...</p>
+    </div>
+
+    <div class="card">
+        <h2>Flashcards</h2>
+
+        <p> 0 cards created</p>
+
+    </div>
+
+    <div class="card">
+    <h2>Assignments</h2>
+
+    {% if assignments %}
+
+        {% for assignment in assignments %}
+
+            <p><strong>{{ assignment[1] }}</strong></p>
+
+            <p>Subject: {{ assignment[2] }}</p>
+
+            <p>Due Date: {{ assignment[3] }}</p>
+
+            <p>Status: {{ assignment[4] }}</p>
+
+            <a href="/edit_assignment/{{ assignment[0] }}" class="btn">Edit</a>
+
+            <a href="/delete_assignment/{{ assignment[0] }}" class="btn">Delete</a>
+
+            {% if assignment[4] == "Pending" %}
+    <a href="/complete_assignment/{{ assignment[0] }}" class="btn">
+        ✔ Complete
+    </a>
+{% else %}
+    <strong>✅ Completed</strong>
+{% endif %}
+
+            <hr>
+
+        {% endfor %}
+
+    {% else %}
+
+        <p>No assignments</p>
+
+    {% endif %}
+
+</div>
+    </div>
+
+
+
+{% endblock %}
