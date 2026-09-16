@@ -76,6 +76,13 @@ def login():
 
     return render_template("login.html")
 
+@app.route("/logout")
+def logout():
+
+    session.clear()
+
+    return redirect(url_for("login"))
+
 @app.route("/add_assignment", methods=["GET", "POST"])
 def add_assignment():
 
@@ -200,6 +207,8 @@ def register():
 
         connection.close()
 
+        return redirect(url_for("login"))
+
     return render_template("register.html")
 
 @app.route("/dashboard")
@@ -227,30 +236,33 @@ def dashboard():
 
     user = cursor.fetchone()
 
-    xp = user[0]
-
+    total_xp = user[0]
     coins = user[1]
 
-    level = (xp // 100) + 1
-
-    current_xp = xp % 100
-
+    level = (total_xp // 100) + 1
+    xp = total_xp % 100
     xp_cap = 100
 
     if level < 5:
-        rank = "🌱Beginner"
+        rank = "🌱 Beginner"
+
     elif level < 10:
-        rank = "📚Knowledge Seeker"
+        rank = "📚 Knowledge Seeker"
+
     elif level < 20:
-        rank = "⚔️Scholar"
-    elif level<30:
-        rank="🔥Elite Scholar"
-    elif level<50:
-        rank="👑 Master"
-    elif level<100:
-        rank="🌌 Grandmaster"
+        rank = "⚔️ Scholar"
+
+    elif level < 30:
+        rank = "🔥 Elite Scholar"
+
+    elif level < 50:
+        rank = "👑 Master"
+
+    elif level < 100:
+        rank = "🌌 Grandmaster"
+
     else:
-        rank="Ascending Forevermore..."
+        rank = "Ascending Forevermore..."
 
     connection.close()
 
@@ -263,11 +275,13 @@ def dashboard():
         "dashboard.html",
         username=username,
         assignments=assignments,
-        xp=current_xp,
+        xp=xp,
+        xp_cap=xp_cap,
+        total_xp=total_xp,
         level=level,
         coins=coins,
-        xp_cap=xp_cap,
-        rank=rank)
+        rank=rank
+    )
 
 print("Before app.run()")
 

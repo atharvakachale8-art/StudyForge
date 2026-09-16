@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-Dashboard|StudyForge
+Dashboard | StudyForge
 {% endblock %}
 
 {% block content %}
@@ -10,7 +10,7 @@ Dashboard|StudyForge
 
 <div class="dashboard">
 
-    <!-- Player Card -->
+    <!-- PLAYER CARD -->
     <div class="player-card">
 
         <h2>{{ username }}</h2>
@@ -19,18 +19,23 @@ Dashboard|StudyForge
 
         <p>⭐ Level {{ level }}</p>
 
-        <p>XP: {{ xp }}/{{ xp_cap }}</p>
+       <p>XP THIS LEVEL: {{ xp }}/{{ xp_cap }}</p>
 
-        <div class="xp-bar">
-            <div class="xp-fill" style="width: {{ xp }}%;"></div>
-        </div>
+<div class="xp-bar">
+    <div
+        class="xp-fill"
+        style="width: {{ (xp / xp_cap) * 100 }}%;">
+    </div>
+</div>
+
+<p>Total XP: {{ total_xp }}</p>
 
         <p>💰 Coins: {{ coins }}</p>
 
     </div>
 
 
-    <!-- Daily Mission -->
+    <!-- DAILY MISSION -->
     <div class="mission-card">
 
         <h2>Today's Mission</h2>
@@ -42,74 +47,124 @@ Dashboard|StudyForge
     </div>
 
 
-    <!-- Assignments -->
-    <div class="assignment-card">
+    <!-- QUEST LOG -->
+    <div class="assignment-card quest-log">
 
-        <h2>⚔ Active Quests</h2>
+        <div class="quest-log-header">
+
+            <h2>⚔ QUEST LOG</h2>
+
+            <a href="/add_assignment" class="quest-add-btn">
+                + REGISTER NEW QUEST
+            </a>
+
+        </div>
+
 
         {% if assignments %}
 
-            
-                {% for assignment in assignments %}
+            {% for assignment in assignments %}
 
-<div class="quest-card">
+                <div class="quest-card">
 
-    <div class="quest-header">
+                    <div class="quest-header">
 
-        <h3>📘 {{ assignment[1] }}</h3>
+                        <h3>📘 {{ assignment[1] }}</h3>
 
-        {% if assignment[4] == "Pending" %}
-            <span class="pending">MAIN QUEST</span>
-        {% else %}
-            <span class="completed">COMPLETED</span>
-        {% endif %}
+                        {% if assignment[4] == "Pending" %}
 
-    </div>
+                            <span class="pending">
+                                MAIN QUEST
+                            </span>
 
-    <p>📚 Subject: {{ assignment[2] }}</p>
+                        {% else %}
 
-    <p>📅 Due: {{ assignment[3] }}</p>
+                            <span class="completed">
+                                COMPLETED
+                            </span>
 
-    <p>Reward: ⭐ +50 XP &nbsp;&nbsp; 💰 +20 Coins</p>
+                        {% endif %}
 
-    {% if assignment[4] == "Pending" %}
-
-        <a href="/complete_assignment/{{ assignment[0] }}" class="btn">
-            Complete Quest
-        </a>
-
-    {% else %}
-
-        <button class="btn completed-btn" disabled>
-            Quest Completed
-        </button>
-
-    {% endif %}
-
-    <a href="/edit_assignment/{{ assignment[0] }}" class="btn">
-        Edit
-    </a>
-
-    <a href="/delete_assignment/{{ assignment[0] }}" class="btn">
-        Abandon
-    </a>
-
-</div>
+                    </div>
 
 
+                    <p>
+                        📚 Subject: {{ assignment[2] }}
+                    </p>
+
+                    <p>
+                        📅 Due: {{ assignment[3] }}
+                    </p>
+
+                    <p>
+                        Reward: ⭐ +50 XP
+                        &nbsp;&nbsp;
+                        💰 +20 Coins
+                    </p>
+
+
+                    {% if assignment[4] == "Pending" %}
+
+                        <a
+                            href="/complete_assignment/{{ assignment[0] }}"
+                            class="btn">
+
+                            Complete Quest
+
+                        </a>
+
+                    {% else %}
+
+                        <button
+                            class="btn completed-btn"
+                            disabled>
+
+                            Quest Completed
+
+                        </button>
+
+                    {% endif %}
+
+
+                    <a
+                        href="/edit_assignment/{{ assignment[0] }}"
+                        class="btn">
+
+                        Edit
+
+                    </a>
+
+
+                    <a
+                        href="/delete_assignment/{{ assignment[0] }}"
+                        class="btn">
+
+                        Abandon
+
+                    </a>
+
+                </div>
 
             {% endfor %}
 
         {% else %}
 
-            <p>No assignments yet.</p>
+            <div class="empty-quests">
+
+                <p>No active quests.</p>
+
+                <a href="/add_assignment" class="quest-add-btn">
+                    + REGISTER YOUR FIRST QUEST
+                </a>
+
+            </div>
 
         {% endif %}
 
     </div>
 
 
-    <!-- Calendar -->
+    <!-- CALENDAR -->
     <div class="calendar-card">
 
         <h2>Calendar</h2>
@@ -119,4 +174,5 @@ Dashboard|StudyForge
     </div>
 
 </div>
+
 {% endblock %}

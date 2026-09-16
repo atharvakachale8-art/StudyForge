@@ -1,23 +1,56 @@
 {% extends "base.html" %}
 
 {% block title %}
-Home|StudyForge
+StudyForge | Level Up Your Mind
 {% endblock %}
 
 {% block content %}
 
-<section class="hero">
-    <h1 class="hero-title">
-    Level Up Your Mind
-</h1>
+<section class="home-hero">
 
-<p class="hero-text">
-    Turn Studying into an adventure. Complete quests, gain XP and conquer every exam.
-</p>
+    <div class="system-status">
+        ◈ SYSTEM READY
+    </div>
 
-<a href="/register" class="btn">
-    Get Started
-</a>
+    <h1 class="home-title">
+        LEVEL UP
+        <span>YOUR MIND</span>
+    </h1>
+
+    <p class="home-subtitle">
+        Turn studying into an adventure.
+        Complete quests. Gain XP. Build your future.
+    </p>
+
+    <div class="home-line"></div>
+
+    <div class="feature-row">
+
+        <div class="feature">
+            <span>⚔</span>
+            <p>QUESTS</p>
+        </div>
+
+        <div class="feature">
+            <span>⭐</span>
+            <p>XP SYSTEM</p>
+        </div>
+
+        <div class="feature">
+            <span>📈</span>
+            <p>PROGRESS</p>
+        </div>
+
+    </div>
+
+    <a href="/register" class="system-btn home-btn">
+        ENTER THE SYSTEM
+    </a>
+
+    <p class="home-footer">
+        Your journey begins here.
+    </p>
+
 </section>
 
 {% endblock %}
