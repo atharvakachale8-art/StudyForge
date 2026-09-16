@@ -1,24 +1,98 @@
 {% extends "base.html" %}
 
 {% block title %}
-Assignment|StudyForge
+Register New Quest | StudyForge
 {% endblock %}
 
 {% block content %}
-    <h1>Assignment</h1>
-    <form action="/add_assignment" method="post">
-        <label for="title">Title:</label>
-        <input type="text" id="title" name="title" required><br><br>
 
-        <label for="description">Description:</label><br>
-        <textarea id="description" name="description" rows="4"></textarea><br><br>
+<div class="auth-page">
 
-        <label for="subject">Subject:</label>
-        <input type="text" id="subject" name="subject" required><br><br>
-        
-        <label for="due_date">Due Date:</label>
-        <input type="date" id="due_date" name="due_date" required><br><br>
+    <div class="auth-card quest-form-card">
 
-        <input type="submit" value="Submit">
-    </form>
+        <div class="system-label">
+            SYSTEM
+        </div>
+
+        <h1 class="auth-title">
+            REGISTER QUEST
+        </h1>
+
+        <p class="auth-subtitle">
+            A new challenge has appeared.
+        </p>
+
+        <div class="system-line"></div>
+
+        <form action="/add_assignment" method="POST">
+
+            <div class="input-group">
+                <label for="title">QUEST TITLE</label>
+                <input
+                    type="text"
+                    id="title"
+                    name="title"
+                    placeholder="Enter quest title"
+                    required
+                >
+            </div>
+
+            <div class="input-group">
+                <label for="subject">SUBJECT</label>
+                <input
+                    type="text"
+                    id="subject"
+                    name="subject"
+                    placeholder="e.g. Mathematics"
+                    required
+                >
+            </div>
+
+            <div class="input-group">
+                <label for="description">DESCRIPTION</label>
+                <textarea
+                    id="description"
+                    name="description"
+                    placeholder="Describe the quest..."
+                    rows="4"
+                    required
+                ></textarea>
+            </div>
+
+            <div class="input-group">
+                <label for="due_date">DEADLINE</label>
+                <input
+                    type="date"
+                    id="due_date"
+                    name="due_date"
+                    required
+                >
+            </div>
+
+            <div class="reward-preview">
+
+                <span>QUEST REWARD</span>
+
+                <div>
+                    ⭐ +50 XP
+                    &nbsp;&nbsp;&nbsp;
+                    💰 +20 COINS
+                </div>
+
+            </div>
+
+            <button type="submit" class="system-btn">
+                REGISTER QUEST
+            </button>
+
+        </form>
+
+        <p class="auth-footer">
+            <a href="/dashboard">← Return to Quest Log</a>
+        </p>
+
+    </div>
+
+</div>
+
 {% endblock %}

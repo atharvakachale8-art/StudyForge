@@ -996,3 +996,324 @@ nav{
     }
 
 }
+
+.quest-form-card{
+    width:460px;
+}
+
+.input-group textarea{
+    width:100%;
+    box-sizing:border-box;
+    padding:14px 16px;
+    background:#0D1117;
+    border:1px solid #30363D;
+    border-radius:10px;
+    color:white;
+    font-family:Segoe UI, sans-serif;
+    font-size:15px;
+    outline:none;
+    resize:vertical;
+    transition:0.3s;
+}
+
+.input-group textarea::placeholder{
+    color:#484F58;
+}
+
+.input-group textarea:focus{
+    border-color:#58A6FF;
+    box-shadow:0 0 12px rgba(88,166,255,0.3);
+}
+
+.input-group input[type="date"]{
+    color-scheme:dark;
+}
+
+.reward-preview{
+    margin:25px 0;
+    padding:18px;
+    border:1px solid rgba(88,166,255,0.2);
+    border-radius:12px;
+    background:rgba(88,166,255,0.04);
+    text-align:center;
+}
+
+.reward-preview span{
+    display:block;
+    color:#58A6FF;
+    font-size:11px;
+    letter-spacing:2px;
+    margin-bottom:10px;
+}
+
+.reward-preview div{
+    color:#C9D1D9;
+    font-size:15px;
+    font-weight:bold;
+}
+
+/* =========================
+   DAILY MISSION
+========================= */
+
+.mission-card{
+    position:relative;
+    overflow:hidden;
+}
+
+.mission-card::before{
+    content:"";
+    position:absolute;
+    top:-80px;
+    right:-80px;
+    width:180px;
+    height:180px;
+    border-radius:50%;
+    background:rgba(88,166,255,0.08);
+    filter:blur(35px);
+}
+
+.mission-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.mission-icon{
+    font-size:26px;
+    color:#58A6FF;
+    text-shadow:0 0 12px rgba(88,166,255,0.7);
+}
+
+.mission-status{
+    padding:5px 10px;
+    border:1px solid rgba(88,166,255,0.4);
+    border-radius:20px;
+    color:#58A6FF;
+    font-size:10px;
+    font-weight:bold;
+    letter-spacing:2px;
+}
+
+.mission-card h2{
+    margin-top:18px;
+    margin-bottom:0;
+    font-size:20px;
+    letter-spacing:2px;
+}
+
+.mission-divider{
+    width:100%;
+    height:1px;
+    margin:18px 0;
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(88,166,255,0.6),
+        transparent
+    );
+}
+
+.mission-main{
+    font-size:15px;
+    font-weight:bold;
+    color:#FFFFFF;
+}
+
+.mission-sub{
+    color:#8B949E;
+    font-size:12px;
+    line-height:1.6;
+}
+
+.mission-progress{
+    margin-top:22px;
+}
+
+.mission-progress-label{
+    display:flex;
+    justify-content:space-between;
+    color:#8B949E;
+    font-size:10px;
+    letter-spacing:1px;
+    margin-bottom:8px;
+}
+
+.mission-bar{
+    height:8px;
+    background:#30363D;
+    border-radius:10px;
+    overflow:hidden;
+}
+
+.mission-fill{
+    width:0%;
+    height:100%;
+    background:linear-gradient(90deg,#4F46E5,#58A6FF);
+    box-shadow:0 0 10px rgba(88,166,255,0.5);
+}
+
+.mission-reward{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-top:22px;
+    flex-wrap:wrap;
+}
+
+.mission-reward > span{
+    width:100%;
+    color:#484F58;
+    font-size:10px;
+    letter-spacing:2px;
+}
+
+.reward-xp,
+.reward-coins{
+    padding:8px 12px;
+    border-radius:8px;
+    background:#20262E;
+    border:1px solid #30363D;
+    font-size:12px;
+    font-weight:bold;
+}
+
+
+/* =========================
+   SYSTEM CALENDAR
+========================= */
+
+.calendar-card{
+    position:relative;
+    overflow:hidden;
+}
+
+.calendar-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.calendar-label{
+    color:#58A6FF;
+    font-size:10px;
+    letter-spacing:3px;
+}
+
+.calendar-header h2{
+    margin:7px 0 0;
+    font-size:22px;
+    letter-spacing:2px;
+}
+
+.calendar-icon{
+    font-size:28px;
+    opacity:0.8;
+    text-shadow:0 0 15px rgba(88,166,255,0.5);
+}
+
+.calendar-divider{
+    height:1px;
+    margin:20px 0;
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(88,166,255,0.5),
+        transparent
+    );
+}
+
+.calendar-weekdays,
+.calendar-grid{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:7px;
+    text-align:center;
+}
+
+.calendar-weekdays{
+    margin-bottom:10px;
+}
+
+.calendar-weekdays span{
+    color:#484F58;
+    font-size:9px;
+    font-weight:bold;
+    letter-spacing:1px;
+}
+
+.calendar-day{
+    position:relative;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:35px;
+    border-radius:8px;
+    color:#C9D1D9;
+    font-size:12px;
+    transition:0.2s;
+}
+
+.calendar-day:hover{
+    background:rgba(88,166,255,0.1);
+    color:white;
+    cursor:pointer;
+}
+
+.calendar-day.muted{
+    color:#30363D;
+}
+
+.calendar-day.today{
+    background:#58A6FF;
+    color:#0D1117;
+    font-weight:bold;
+    box-shadow:0 0 15px rgba(88,166,255,0.5);
+}
+
+.calendar-day.quest-day{
+    border:1px solid #E3B341;
+    color:#E3B341;
+    font-weight:bold;
+}
+
+.calendar-day.quest-day::after{
+    content:"";
+    position:absolute;
+    bottom:4px;
+    width:4px;
+    height:4px;
+    border-radius:50%;
+    background:#E3B341;
+}
+
+.calendar-legend{
+    display:flex;
+    gap:18px;
+    margin-top:20px;
+    color:#8B949E;
+    font-size:10px;
+}
+
+.calendar-legend span{
+    display:flex;
+    align-items:center;
+    gap:6px;
+}
+
+.legend-dot{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    display:inline-block;
+}
+
+.today-dot{
+    background:#58A6FF;
+    box-shadow:0 0 7px #58A6FF;
+}
+
+.quest-dot{
+    background:#E3B341;
+    box-shadow:0 0 7px #E3B341;
+}

@@ -38,13 +38,52 @@ Dashboard | StudyForge
     <!-- DAILY MISSION -->
     <div class="mission-card">
 
-        <h2>Today's Mission</h2>
+    <div class="mission-top">
+        <span class="mission-icon">⚔</span>
 
-        <p>Complete one assignment.</p>
+        <span class="mission-status">
+            DAILY
+        </span>
+    </div>
 
-        <p>Reward: +50 XP</p>
+    <h2>TODAY'S MISSION</h2>
+
+    <div class="mission-divider"></div>
+
+    <p class="mission-main">
+        Complete one assignment.
+    </p>
+
+    <p class="mission-sub">
+        Every completed quest brings you closer to your next level.
+    </p>
+
+    <div class="mission-progress">
+        <div class="mission-progress-label">
+            <span>MISSION PROGRESS</span>
+            <span>0 / 1</span>
+        </div>
+
+        <div class="mission-bar">
+            <div class="mission-fill"></div>
+        </div>
+    </div>
+
+    <div class="mission-reward">
+
+        <span>REWARD</span>
+
+        <div class="reward-xp">
+            ⭐ +50 XP
+        </div>
+
+        <div class="reward-coins">
+            💰 +20 COINS
+        </div>
 
     </div>
+
+</div>
 
 
     <!-- QUEST LOG -->
@@ -165,14 +204,201 @@ Dashboard | StudyForge
 
 
     <!-- CALENDAR -->
-    <div class="calendar-card">
+   <div class="calendar-card">
 
-        <h2>Calendar</h2>
+    <div class="calendar-header">
 
-        <p>Coming Soon...</p>
+        <div>
+            <span class="calendar-label">SYSTEM CALENDAR</span>
+            <h2 id="calendar-month"></h2>
+        </div>
+
+        <div class="calendar-icon">
+            📅
+        </div>
+
+    </div>
+
+    <div class="calendar-divider"></div>
+
+    <div class="calendar-weekdays">
+        <span>SUN</span>
+        <span>MON</span>
+        <span>TUE</span>
+        <span>WED</span>
+        <span>THU</span>
+        <span>FRI</span>
+        <span>SAT</span>
+    </div>
+
+    <div id="calendar-grid" class="calendar-grid"></div>
+
+    <div class="calendar-legend">
+
+        <span>
+            <i class="legend-dot today-dot"></i>
+            Today
+        </span>
+
+        <span>
+            <i class="legend-dot quest-dot"></i>
+            Quest Deadline
+        </span>
 
     </div>
 
 </div>
+
+
+<script id="quest-data" type="application/json">
+    {{ quest_deadlines | tojson }}
+</script>
+
+
+<script>
+
+function generateCalendar() {
+
+    const questDeadlines = JSON.parse(
+        document.getElementById("quest-data").textContent
+    );
+
+    const now = new Date();
+
+    const year = now.getFullYear();
+    const month = now.getMonth();
+    const today = now.getDate();
+
+    const monthNames = [
+        "JANUARY",
+        "FEBRUARY",
+        "MARCH",
+        "APRIL",
+        "MAY",
+        "JUNE",
+        "JULY",
+        "AUGUST",
+        "SEPTEMBER",
+        "OCTOBER",
+        "NOVEMBER",
+        "DECEMBER"
+    ];
+
+    document.getElementById("calendar-month").textContent =
+        monthNames[month] + " " + year;
+
+    const calendarGrid =
+        document.getElementById("calendar-grid");
+
+    calendarGrid.innerHTML = "";
+
+
+    // First day of the month
+
+    const firstDay =
+        new Date(year, month, 1).getDay();
+
+
+    // Number of days in the month
+
+    const daysInMonth =
+        new Date(year, month + 1, 0).getDate();
+
+
+    // Previous month's days
+
+    const daysInPreviousMonth =
+        new Date(year, month, 0).getDate();
+
+
+    // Add previous month's trailing days
+
+    for (let i = firstDay - 1; i >= 0; i--) {
+
+        const day = document.createElement("span");
+
+        day.className = "calendar-day muted";
+
+        day.textContent =
+            daysInPreviousMonth - i;
+
+        calendarGrid.appendChild(day);
+    }
+
+
+    // Add current month's days
+
+    for (
+        let dayNumber = 1;
+        dayNumber <= daysInMonth;
+        dayNumber++
+    ) {
+
+        const day = document.createElement("span");
+
+        day.className = "calendar-day";
+
+        day.textContent = dayNumber;
+
+
+        // Highlight today
+
+        if (dayNumber === today) {
+
+            day.classList.add("today");
+
+        }
+
+
+        // Create YYYY-MM-DD
+
+        const currentDate =
+            year + "-" +
+            String(month + 1).padStart(2, "0") + "-" +
+            String(dayNumber).padStart(2, "0");
+
+
+        // Highlight quest deadline
+
+        if (questDeadlines.includes(currentDate)) {
+
+            day.classList.add("quest-day");
+
+        }
+
+
+        calendarGrid.appendChild(day);
+
+    }
+
+
+    // Fill remaining cells
+
+    const totalCells =
+        calendarGrid.children.length;
+
+    const remainingCells =
+        42 - totalCells;
+
+
+    for (let i = 1; i <= remainingCells; i++) {
+
+        const day = document.createElement("span");
+
+        day.className = "calendar-day muted";
+
+        day.textContent = i;
+
+        calendarGrid.appendChild(day);
+
+    }
+
+}
+
+
+generateCalendar();
+
+</script>
+
 
 {% endblock %}

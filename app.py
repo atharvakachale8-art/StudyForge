@@ -228,6 +228,8 @@ def dashboard():
 
     assignments = cursor.fetchall()
 
+    quest_deadlines = [assignment[3] for assignment in assignments]
+
     cursor.execute("""
     SELECT xp, coins
     FROM users
@@ -277,6 +279,7 @@ def dashboard():
         assignments=assignments,
         xp=xp,
         xp_cap=xp_cap,
+        quest_deadlines=quest_deadlines,
         total_xp=total_xp,
         level=level,
         coins=coins,
